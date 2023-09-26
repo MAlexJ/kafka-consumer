@@ -1,4 +1,8 @@
 spring:
+  data:
+    mongodb:
+      database: ${MONGODB_DATABASE}
+      uri: ${MONGODB_URI}
   kafka:
     properties:
       sasl:
