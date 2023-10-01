@@ -29,3 +29,13 @@ cloud:
     topic: ${CLOUD_KAFKA_USERNAME}-default
 server:
   port: 8082
+management:
+  endpoints.web.exposure.include: prometheus, health
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
