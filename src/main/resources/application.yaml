@@ -1,8 +1,13 @@
+server:
+  port: ${APP_SERVICE_PORT:8082}
+
 spring:
-  data:
-    mongodb:
-      database: ${MONGODB_DATABASE}
-      uri: ${MONGODB_URI}
+  config:
+    import: optional:file:.env[.properties]
+
+  application:
+    name: ${APP_SERVICE_NAME:kafka-consumer}
+
   kafka:
     properties:
       sasl:
@@ -23,12 +28,12 @@ spring:
             trusted:
               packages: sample.kafka
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    bootstrap-servers: ${CLOUD_KAFKA_BROKERS}
+    bootstrap-servers: ${CLOUD_KAFKA_BROKER_URL}
+
 cloud:
   kafka:
     topic: ${CLOUD_KAFKA_USERNAME}-default
-server:
-  port: 8082
+
 management:
   endpoints.web.exposure.include: prometheus, health
   metrics:
